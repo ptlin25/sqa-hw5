@@ -7,15 +7,22 @@ Feature under test: Post browsing and comment retrieval
 ## Operational Profile
 browse all posts -> read a single post -> view post comments or view author profile
 
-Users start on the landing page and browse all posts. When they see a post that interests them, they will click on the post to read more. From there, they might view the comments or view the author's profile.
-
-## Load Profile
 1. Browse all posts: 40% users
 2. Read a single post: 30% users
 3. View post comments: 20% users
 4. View author profile: 10% users
 
-The load test will ramp up to 100 VUs over a minute, hold for 3 minutes, and then ramp down. The spike test will ramp up to 100 VUs over a minute, spike to 1000 VUs in 10 seconds, hold for a minute, drop to 100 VUs in 10 seconds, and then ramp down.
+The operational profile models a typical blog reader session on JSONPlaceholder. 
+Users naturally start by browsing all posts, so it has the highest weight. Some 
+users will click into a specific post, a smaller portion will read comments, and
+an even smaller portion will read the author's profile (10%). 
+
+## Load Profile
+The load test ramps up to 100 VUs over one minute, holds for three minutes, then
+ramps down — this simulates sustained normal traffic and validates that the 
+system can meet SLAs under normal conditions. The spike test starts at a 100 VU 
+baseline, then surges to 1,000 VUs in 10 seconds to simulate a sudden burst of 
+traffic, then recovers back to baseline to observe how the system stabilizes.
 
 
 ## SLAs (pass/fail thresholds — evaluated after each test run)
